@@ -1,0 +1,10 @@
+Django==3.2
+djangorestframework==3.14.0
+gunicorn==20.1.0
+django-cors-headers==3.10.0
+requests==2.26.0
+mysqlclient>=2.0.0
+msal==1.27.0
+pymysql
+djangorestframework>=3.12
+PyJWT>=2.0

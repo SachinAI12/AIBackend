@@ -1,0 +1,11 @@
+sudo docker build -t my_django_app -f "/home/priyanka/Downloads/myproject2/myproject/Dockerfile" .
+
+cd "/home/priyanka/Downloads/myproject2/myproject"
+sudo docker build -t my_django_app .
+
+to start the docker 
+sudo docker run -p 8000:8000 my_django_app
+
+to build and restart (use this to reflect any changes without rebuilding the conatiner)
+sudo docker-compose up --build
+

@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  # Web service (Django application)
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8001
+    working_dir: /app
+    volumes:
+      - "./:/app"  # Mount the entire project directory to /app (for code changes)
+    environment:
+      - DB_NAME=        # Set the MySQL database name
+      - DB_USER=       # Set the MySQL username
+      - DB_PASSWORD=    # Set the MySQL password
+      - DB_HOST=  # The service name of the MySQL container
+      - DB_PORT=3306              # MySQL default port
+    ports:
+      - "8001:8001"
+    depends_on:
+      - db  # Ensure that the db service is started before the web service
+
+  # MySQL service
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD=  # Set the MySQL root password
+      MYSQL_DATABASE=      # Set the default database
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql   # Persist MySQL data
+
+# Define the named volume for MySQL data persistence
+volumes:
+  mysql_data:

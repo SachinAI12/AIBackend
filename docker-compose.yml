@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+  # Django App (Backend)
+  web:
+    build:
+      context: .  # Path to your Django app directory (where the Dockerfile is located)
+      #container_name: django-app
+      #network_mode: host
+    #env_file:
+    #  - .env
+    ports:
+      - "4000:3000"  # Expose Django API port
+    volumes:
+      - .:/app  # Mount the current directory to the /app directory in the container
+   
+
+    environment:
+      - DJANGO_DB_HOST=gen-poc.-1.rds.amazonaws.com  # Use your RDS endpoint here
+      - DJANGO_DB_NAME=                # Database name
+      - DJANGO_DB_USER=''                # Database user
+      - DJANGO_DB_PASSWORD=''        # Database password    
+    command: ["python", "manage.py", "runserver", "0.0.0.0:3000"]  # Start the Django development server
+    
+ 
+
+  nginx:
+    image: nginx
+    #network_mode: host
+    ports:
+      - 3000:80
+        # mem_limit: 2500m
+    restart: always
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - /var/log/myproject-nginx/:/var/log/myproject-nginx/
+    depends_on:
+      - web
+    
+
