@@ -1,42 +1,28 @@
-# MailBot 📬🤖
+# 🛠️ Django REST API Backend
 
-MailBot is an intelligent, automated email processing system that fetches unread emails, analyzes content using a LLaMA model on AWS Bedrock, and replies based on confidence scoring. It supports knowledge base integration, vector-based search, and guardrails for safe, context-aware responses.
+This project is a RESTful API built using Django and Django REST Framework (DRF). It powers a React frontend by handling requests, processing data, and managing database operations.
 
 ---
 
 ## 🚀 Features
 
-- 📥 Fetch unread emails from Outlook using Microsoft Graph API
-- 🧠 Use AWS Bedrock-hosted LLaMA model for response generation
-- 🔎 Perform semantic search using SentenceTransformer and OpenSearch
-- 🛡️ Implement guardrails and confidence scoring (High / Medium / Low)
-- ✉️ Automatically reply to emails with high-confidence responses
-- 📊 Log responses in MySQL with status: Sent / Not Sent
-- 📁 Upload knowledge base from Excel for contextual accuracy
-- 🧾 Track and update status of each processed email
+- RESTful API endpoints
+- Seamless integration with a React frontend
+- Handles request-response communication and data processing
+- Connected to a relational database (RDS)
+- Input validation via serializers
+- Modular, scalable project structure
+- JWT authentication support
 
 ---
 
-## ⚙️ Tech Stack
+## 🧰 Tech Stack
 
-- Language: Python
-- Email API: Microsoft Graph API
-- LLM: LLaMA 3 via AWS Bedrock
-- Vector Search: OpenSearch
-- Database: MySQL
-- NLP: SentenceTransformer
-
+- Backend: Django, Django REST Framework
+- Language: Python 3.2
+- Database: SQLite (default), can be configured to RDS
+- Frontend: React (consuming the API)
 
 ---
 
-## 🧠 Architecture Overview
-
-1. A scheduler triggers the email listener.
-2. Unread emails are fetched from a specific folder (e.g., "ProgramFolder").
-3. Content is matched with a knowledge base using semantic similarity.
-4. Context and content are sent to the LLaMA model via Bedrock.
-5. Confidence is evaluated:
-   - High → auto-reply and log
-   - Medium/Low → hold for manual review
-6. Results are stored in the database with timestamp 
 
