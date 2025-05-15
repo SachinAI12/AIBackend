@@ -52,60 +52,7 @@ sql
 Copy
 Edit
 
-### 🔧 Dockerfile (Django App)
 
-```Dockerfile
-# Dockerfile
-FROM python:3.10-slim
-
-WORKDIR /app
-
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY . .
-
-CMD ["gunicorn", "backend.wsgi:application", "--bind", "0.0.0.0:8000"]
-🌐 Nginx Configuration (nginx/default.conf)
-nginx
-Copy
-Edit
-server {
-    listen 80;
-    server_name localhost;
-
-    location / {
-        proxy_pass http://web:8000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-    }
-}
-🧱 docker-compose.yml
-yaml
-Copy
-Edit
-version: '3.8'
-
-services:
-  web:
-    build: .
-    container_name: django_app
-    volumes:
-      - .:/app
-    expose:
-      - 8000
-    depends_on:
-      - nginx
-
-  nginx:
-    image: nginx:latest
-    container_name: nginx_server
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - web
 ▶️ Running the Project with Docker
 Build and start containers:
 
